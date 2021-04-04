@@ -1,6 +1,9 @@
 package timingtest;
 import edu.princeton.cs.algs4.Stopwatch;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hug.
  */
@@ -23,5 +26,26 @@ public class TimeAList {
 
     public static void timeAListConstruction() {
         // TODO: YOUR CODE HERE
+        Stopwatch sw = new Stopwatch();
+        AList<Double> time = new AList<>();
+        AList<Integer> size = new AList<>();
+        AList<Integer> OpCounts = new AList<>();
+        //List<Double> microSec = new ArrayList<>(8);
+        int initSize = 100000;
+
+        while (initSize <= 12800000) {
+            int opCalls = 0;
+            AList<Integer> n = new AList<>();
+            while (n.size() < initSize) {
+                n.addLast(1);
+                opCalls += 1;
+            }
+            time.addLast(sw.elapsedTime());
+            OpCounts.addLast(opCalls);
+            size.addLast(initSize);
+            initSize *= 2;
+        }
+        
+        printTimingTable(size, time, OpCounts);
     }
 }
